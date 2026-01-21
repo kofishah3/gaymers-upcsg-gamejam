@@ -1,42 +1,88 @@
 extends CharacterBody2D
 class_name PlayerController
 
+@export var camera : Camera2D
+
 @export var speed = 10.0
 @export var jump_power = 10.0
+@export var dash_speed := 1200.0 #higher number, more distance
+@export var dash_duration := 0.12 
+@export var dash_decay :=10000.0 #higher number, less distance
+@export var dash_cooldown := 0.6
 
 var speed_multiplier = 30.0
 var sprint_multiplier = 1.5
 var jump_multiplier = -30.0
-
-var direction := 0
+var direction := 0.0
 var jump_count = 0
-var is_sprinting := false
+var is_dashing := false
+var dash_time := 0.0
+var dash_cooldown_time := 0.0
+var last_facing_direction := 1.0 
 
 func _physics_process(delta: float) -> void:
+	# DASH HANDLING
+	if dash_cooldown_time > 0:
+		dash_cooldown_time -= delta
+	
+	if is_dashing:
+		dash_time -= delta
+		velocity.y = 0
+		velocity.x = move_toward(velocity.x, 0, dash_decay * delta)
+		
+		if dash_time <= 0:
+			is_dashing = false
+		
+		move_and_slide()
+		return
+	
 	# GRAVITY
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	if is_on_floor():
+	else:
 		jump_count = 0
-
-	# JUMP
-	if Input.is_action_just_pressed("jump"):
-		if jump_count < 2:			
-			velocity.y = jump_power * jump_multiplier
-		jump_count += 1								
 	
-	# MOVEMENT
+	# JUMP
+	if Input.is_action_just_pressed("jump"):		
+		var jump_boost := 0.0 
+		if jump_count < 2:
+			# if double jump, shake camera - also make it stronger
+			if camera and jump_count == 1:
+				jump_boost = 3.0
+				camera.shake(1.5)
+				
+			velocity.y = (jump_power + jump_boost) * jump_multiplier
+		jump_count += 1
+	
+	# DASH INPUT
+	if Input.is_action_just_pressed("dash") and dash_cooldown_time <= 0:
+		start_dash()
+		return  
+	
+	# MOVEMENT 
 	direction = Input.get_axis("move_left", "move_right")
-
-	is_sprinting = Input.is_action_pressed("sprint") and direction != 0 and is_on_floor()
-
 	var current_speed = speed * speed_multiplier
-	if is_sprinting:
-		current_speed *= sprint_multiplier
-
+	
+	# UPDATE HORIZONTAL VELOCITY
 	if direction != 0:
+		last_facing_direction = sign(direction)
 		velocity.x = direction * current_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
-
+	
 	move_and_slide()
+
+func start_dash():
+	is_dashing = true
+	dash_time = dash_duration
+	dash_cooldown_time = dash_cooldown
+	
+	var dash_dir = sign(direction)
+	if dash_dir == 0:
+		dash_dir = last_facing_direction
+	
+	velocity.x = dash_dir * dash_speed
+	velocity.y = 0
+	
+	if camera: 
+		camera.shake(1.5)

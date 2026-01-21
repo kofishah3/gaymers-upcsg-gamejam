@@ -1,8 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://my4hcpsq6yel"]
+[gd_scene load_steps=14 format=3 uid="uid://my4hcpsq6yel"]
 
 [ext_resource type="Texture2D" uid="uid://cumdwbohi2a2i" path="res://Assets/Sprites/temp-character-runcycle.png" id="1_6cd4h"]
 [ext_resource type="Script" uid="uid://bovn276cct217" path="res://Assets/Scripts/player_controller.gd" id="1_7dd06"]
 [ext_resource type="Script" uid="uid://dfmbtdocfb6su" path="res://Assets/Scripts/player_animator.gd" id="2_38rej"]
+[ext_resource type="Script" uid="uid://vxm1tg1wi1rv" path="res://Assets/Scenes/camera_2d.gd" id="2_t1xgp"]
+
+[sub_resource type="Curve" id="Curve_t1xgp"]
+_data = [Vector2(0, 0.97752815), 0.0, 0.0, 0, 0, Vector2(0.9941861, 0.29213488), -0.8013152, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Animation" id="Animation_38rej"]
 length = 0.001
@@ -16,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 30, 16, 18)]
+"values": [Rect2(4, 30, 16, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_c3tg1"]
@@ -70,23 +75,6 @@ tracks/0/keys = {
 "values": [Rect2(28, 94, 16, 18), Rect2(28, 94, 16, 18)]
 }
 
-[sub_resource type="Animation" id="Animation_t1xgp"]
-resource_name = "running"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Rect2(4, 158, 16, 18), Rect2(28, 158, 16, 18), Rect2(52, 158, 16, 18), Rect2(76, 158, 16, 18)]
-}
-
 [sub_resource type="Animation" id="Animation_7dd06"]
 resource_name = "walking"
 loop_mode = 1
@@ -104,13 +92,30 @@ tracks/0/keys = {
 "values": [Rect2(4, 30, 16, 18), Rect2(28, 30, 16, 18), Rect2(52, 30, 16, 18), Rect2(76, 30, 16, 18), Rect2(4, 30, 16, 18)]
 }
 
+[sub_resource type="Animation" id="Animation_t1xgp"]
+resource_name = "dash"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(76, 62, 16, 18), Rect2(76, 62, 16, 18)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_38rej"]
 _data = {
 &"RESET": SubResource("Animation_38rej"),
+&"dash": SubResource("Animation_t1xgp"),
 &"fall": SubResource("Animation_c3tg1"),
 &"idle": SubResource("Animation_23lac"),
 &"jump": SubResource("Animation_w3t24"),
-&"running": SubResource("Animation_t1xgp"),
 &"walking": SubResource("Animation_7dd06")
 }
 
@@ -118,19 +123,36 @@ _data = {
 radius = 4.0
 height = 18.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_7dd06")
+camera = NodePath("Camera2D")
 speed = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -17)
 zoom = Vector2(4, 4)
+script = ExtResource("2_t1xgp")
 
-[node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
+[node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "jump_particles")]
 script = ExtResource("2_38rej")
 player_controller = NodePath("..")
 animation_player = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
+jump_particles = NodePath("JumpBurstParticles")
+
+[node name="JumpBurstParticles" type="CPUParticles2D" parent="PlayerAnimator"]
+rotation = 0.19198622
+skew = 1.0471976
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 6.0
+initial_velocity_max = 15.0
+angular_velocity_max = 333.91
+scale_amount_curve = SubResource("Curve_t1xgp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnimator"]
 root_node = NodePath("../..")
@@ -144,7 +166,7 @@ speed_scale = 1.25
 position = Vector2(0, -9)
 texture = ExtResource("1_6cd4h")
 region_enabled = true
-region_rect = Rect2(0, 30, 16, 18)
+region_rect = Rect2(4, 30, 16, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
