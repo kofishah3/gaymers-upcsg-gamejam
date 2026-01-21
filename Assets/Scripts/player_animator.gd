@@ -4,21 +4,26 @@ extends Node2D
 @export var animation_player : AnimationPlayer
 @export var sprite : Sprite2D
 
-func _process(delta):	
-	#character srite flipping
-	if player_controller.direction == 1:
+func _process(delta):
+	# SPRITE FLIP
+	if player_controller.direction > 0:
 		sprite.flip_h = false
-	elif player_controller.direction == -1:
+	elif player_controller.direction < 0:
 		sprite.flip_h = true
-	
-	#movement animation handling	
-	if abs(player_controller.velocity.x) > 0:
-		animation_player.play("walking")
-	else: 
-		animation_player.play("idle")
-	
-	#plays jump animation
+
+	# ANIMATION SELECTION (priority-based)
+	var anim := "idle"
+
 	if player_controller.velocity.y < 0:
-		animation_player.play("jump") #temporary will be replaced with jumping
+		anim = "jump"
 	elif player_controller.velocity.y > 0:
-		animation_player.play("fall") #temporary will be replaced with falling
+		anim = "fall"
+	elif abs(player_controller.velocity.x) > 0:
+		if player_controller.is_sprinting:
+			anim = "running"
+		else:
+			anim = "walking"
+
+	# Play only if changed (VERY important)
+	if animation_player.current_animation != anim:
+		animation_player.play(anim)
