@@ -5,9 +5,9 @@ class_name PlayerController
 
 @export var speed = 10.0
 @export var jump_power = 10.0
-@export var dash_speed := 1200.0 #higher number, more distance
+@export var dash_speed := 800.0 #higher number, more distance
 @export var dash_duration := 0.12 
-@export var dash_decay :=10000.0 #higher number, less distance
+@export var dash_decay := 6000.0 #higher number, less distance
 @export var dash_cooldown := 0.6
 
 var speed_multiplier = 30.0
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	
 	# GRAVITY
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta 
 	else:
 		jump_count = 0
 	
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		if jump_count < 2:
 			# if double jump, shake camera - also make it stronger
 			if camera and jump_count == 1:
-				jump_boost = 3.0
+				jump_boost = 2.0
 				camera.shake(1.5)
 				
 			velocity.y = (jump_power + jump_boost) * jump_multiplier
