@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 @export var player: Node2D
 @export var follow_offset := Vector2(-20, -25)
-@export var follow_speed := 8.0
+@export var follow_speed := 5.0
 
-@export var max_tilt_deg := 12.0      # max tilt angle
-@export var tilt_smooth := 10.0        # rotation smoothing
+@export var max_tilt_deg := 20.0      # max tilt angle
+@export var tilt_smooth := 10.0       # rotation smoothing
 
 var last_position: Vector2
 
@@ -20,7 +20,7 @@ func _physics_process(delta):
 	global_position = global_position.lerp(target_pos, follow_speed * delta)
 
 	# TILT LOGIC
-	var velocity = (global_position - last_position) / delta
+	velocity = (global_position - last_position) / delta
 	last_position = global_position
 
 	if velocity.length() > 1.0:

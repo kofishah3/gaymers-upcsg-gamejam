@@ -131,7 +131,8 @@ dash_speed = 600.0
 dash_decay = 3000.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(6, 6)
+offset = Vector2(0, -1000)
+zoom = Vector2(4, 4)
 script = ExtResource("2_t1xgp")
 
 [node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "jump_particles")]
