@@ -12,7 +12,7 @@ func _process(delta):
 			randf_range(-shake_strength, shake_strength)
 		)
 	else:
-		offset = Vector2.ZERO
+		offset = Vector2.ZERO	
 
 func shake(amount: float):
 	shake_strength = max(shake_strength, amount)
