@@ -6,7 +6,7 @@ extends Node2D
 
 var direction := 0
 
-func _process(delta):
+func _process(_delta):
 	if !drone_controller or !sprite: 
 		return 
 	

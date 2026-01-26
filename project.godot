@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UPCSGGameJam"
-run/main_scene="uid://dct132ia4l3on"
+run/main_scene="uid://bm4una4slc24r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -41,3 +41,4 @@ dash={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.18152961, 0.20415607, 0.36144277, 1)
