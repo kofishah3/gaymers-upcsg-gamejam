@@ -1,11 +1,11 @@
-[gd_scene load_steps=51 format=4 uid="uid://bm4una4slc24r"]
+[gd_scene load_steps=51 format=4 uid="uid://cp1bkydcm2eio"]
 
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_l5tfc"]
 [ext_resource type="Texture2D" uid="uid://dis8g5tjy6kcs" path="res://Assets/Sprites/image (1).png" id="1_nmjic"]
 [ext_resource type="Texture2D" uid="uid://c0qt01gudq05t" path="res://Assets/Sprites/temporary_tiles.png" id="2_ianxq"]
 [ext_resource type="PackedScene" uid="uid://bn8ryl7dnd6np" path="res://Assets/Scenes/drone.tscn" id="2_wa1nu"]
 [ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/player.tscn" id="3_jgeft"]
-[ext_resource type="PackedScene" uid="uid://cefciwqryshpn" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgeft"]
 texture = ExtResource("1_l5tfc")
