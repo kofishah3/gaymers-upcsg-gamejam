@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UPCSGGameJam"
-run/main_scene="uid://h5b8xbiexkqx"
+run/main_scene="uid://bm4una4slc24r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

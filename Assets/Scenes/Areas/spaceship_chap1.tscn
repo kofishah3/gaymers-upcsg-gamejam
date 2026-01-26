@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=4 uid="uid://dct132ia4l3on"]
+[gd_scene load_steps=21 format=4 uid="uid://dct132ia4l3on"]
 
 [ext_resource type="Texture2D" uid="uid://dis8g5tjy6kcs" path="res://Assets/Sprites/image (1).png" id="1_jgeft"]
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_l5tfc"]
 [ext_resource type="PackedScene" uid="uid://bn8ryl7dnd6np" path="res://Assets/Scenes/drone.tscn" id="2_wa1nu"]
 [ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/player.tscn" id="3_jgeft"]
-[ext_resource type="Script" uid="uid://vxm1tg1wi1rv" path="res://Assets/Scenes/camera_2d.gd" id="5_51ch6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgeft"]
 texture = ExtResource("1_l5tfc")
@@ -540,16 +539,8 @@ tile_set = SubResource("TileSet_jgeft")
 position = Vector2(33, -19)
 player = NodePath("../Player")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_jgeft")]
+[node name="Player" parent="." instance=ExtResource("3_jgeft")]
 position = Vector2(48, 0)
-camera = NodePath("Camera2D2")
-
-[node name="Camera2D2" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)
-limit_enabled = false
-position_smoothing_speed = 1.0
-drag_vertical_offset = -0.3
-script = ExtResource("5_51ch6")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.2159017, 0.21590173, 0.2159017, 1)
