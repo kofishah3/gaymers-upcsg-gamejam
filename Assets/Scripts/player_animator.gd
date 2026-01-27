@@ -24,7 +24,7 @@ func _process(delta):
 
 	if player_controller.is_dashing:
 		anim = "dash"
-	elif Input.get_action_strength("climb_down") or Input.get_action_strength("climb_up") and player_controller.is_climbing:
+	elif (Input.get_action_strength("climb_down") or Input.get_action_strength("climb_up")) and player_controller.is_climbing:
 		anim = "climbing"
 		
 	elif player_controller.velocity.y < 0:
