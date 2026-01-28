@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://431a7dsmfu84"
-path="res://.godot/imported/drone-beam-texture.png-b53ed75e4bc92d293b8918869de0b078.ctex"
+uid="uid://dthw0x1y0r3sv"
+path="res://.godot/imported/engineroomsprites.png-1c9e8af5c262453c1b1aa680a796dd3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/drone-beam-texture.png"
-dest_files=["res://.godot/imported/drone-beam-texture.png-b53ed75e4bc92d293b8918869de0b078.ctex"]
+source_file="res://Assets/Sprites/engineroomsprites.png"
+dest_files=["res://.godot/imported/engineroomsprites.png-1c9e8af5c262453c1b1aa680a796dd3b.ctex"]
 
 [params]
 

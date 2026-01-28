@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://431a7dsmfu84"
-path="res://.godot/imported/drone-beam-texture.png-b53ed75e4bc92d293b8918869de0b078.ctex"
+uid="uid://dis8g5tjy6kcs"
+path="res://.godot/imported/image (1).png-0d2d470c1454f34bb523b63901fe451a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/drone-beam-texture.png"
-dest_files=["res://.godot/imported/drone-beam-texture.png-b53ed75e4bc92d293b8918869de0b078.ctex"]
+source_file="res://Assets/Sprites/image (1).png"
+dest_files=["res://.godot/imported/image (1).png-0d2d470c1454f34bb523b63901fe451a.ctex"]
 
 [params]
 
