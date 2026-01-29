@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="UPCSGGameJam"
-run/main_scene="uid://cp1bkydcm2eio"
+run/main_scene="uid://5575tntw676g"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+<<<<<<<HEADrun/main_scene="uid://cp1bkydcm2eio"
 
 [input]
 
@@ -62,4 +63,5 @@ climb_up={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.18152961, 0.20415607, 0.36144277, 1)
