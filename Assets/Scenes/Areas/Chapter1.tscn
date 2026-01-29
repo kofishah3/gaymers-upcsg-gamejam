@@ -1344,7 +1344,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_ao1pw")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.022188531, 0.0035714868, 0.0032728945, 1)
 blend_mode = 2
 max_distance = 6821.0
 
