@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dwm02j57jg3ve"]
+[gd_scene load_steps=24 format=4 uid="uid://dwm02j57jg3ve"]
 
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_kgarh"]
 [ext_resource type="Script" uid="uid://djsuma1ku48x5" path="res://Assets/Scripts/scoring_test.gd" id="1_mbj6b"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cmmdiq3uy046b" path="res://Assets/Scripts/run_manager.gd" id="5_2nq8v"]
 [ext_resource type="Script" uid="uid://dcjil7fo4uaxx" path="res://Assets/Scenes/UI/pause_menu.gd" id="5_vi43t"]
 [ext_resource type="Script" uid="uid://8o46q688oju5" path="res://Assets/Scripts/save_manager.gd" id="7_7mu5j"]
+[ext_resource type="PackedScene" uid="uid://c7bf8ildjpuwr" path="res://Assets/Scenes/Entities/player_ghost.tscn" id="9_htmmk"]
 [ext_resource type="Script" uid="uid://dp2daypamna5j" path="res://Assets/Scripts/pre_run_menu.gd" id="10_w85ap"]
 [ext_resource type="Script" uid="uid://be2mri08mp6wy" path="res://Assets/Scripts/leaderboard.gd" id="11_affy8"]
 [ext_resource type="PackedScene" uid="uid://bsyin0m6hsplu" path="res://Assets/Scenes/Leaderboard/leaderboardentry.tscn" id="12_6isip"]
@@ -895,6 +896,7 @@ drag_bottom_margin = 0.1
 script = ExtResource("7_7mu5j")
 
 [node name="RunManager" type="Node2D" parent="." node_paths=PackedStringArray("run_timer_label", "tile_score_label", "final_score_label", "player", "tilemap", "debugtilemap", "save_manager", "leader_board")]
+position = Vector2(0, 1)
 script = ExtResource("5_2nq8v")
 run_timer_label = NodePath("../UI/HUD/timer")
 tile_score_label = NodePath("../UI/HUD/final_score")
@@ -904,6 +906,7 @@ tilemap = NodePath("../WorldStuff/Interactable")
 debugtilemap = NodePath("../WorldStuff/Trail")
 save_manager = NodePath("../SaveManager")
 leader_board = NodePath("../UI/Leaderboard")
+playerghost_scene = ExtResource("9_htmmk")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

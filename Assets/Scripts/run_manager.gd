@@ -8,10 +8,16 @@ extends Node2D
 @export var debugtilemap : TileMapLayer
 @export var save_manager : Node   # SaveManager
 @export var leader_board: Control
-	
+@export var playerghost_scene: PackedScene
+
 const BASE_TILE_SCORE = 10.0
 const DECAY_PERPLAYER = 0.5
 const BASE_LOWEST_POINT = 2.0
+const TIME_REF := 30.0     
+const MIN_TIME := 0.25     
+const MIN_FACTOR := 0.5
+const MAX_FACTOR := 2.0
+
 
 var visited_tiles := {}
 var global_tile_counts := {}
@@ -27,12 +33,14 @@ const DEBUG_ALT = 0
 # for recording our run data
 var run_record := []
 var record_timer := 0.0
-const RECORD_INTERVAL := 0.1
+const RECORD_INTERVAL := 0.05
 
 
 func _ready():
 	# pull persistent tile counts
 	global_tile_counts = save_manager.tile_counts
+	
+	spawn_ghosts()	
 
 func _process(delta):
 	if not running:
@@ -97,7 +105,8 @@ func end_run():
 	running = false
 
 	var tile_score = calculate_tile_score()
-	var final_score = tile_score
+	var tf = time_factor(run_time)
+	var final_score = tile_score * tf
 
 	update_global_counts()
 	
@@ -123,3 +132,27 @@ func record_snapshot():
 		"x": player.global_position.x,
 		"y": player.global_position.y
 	})
+	
+
+var ghost_colors = [
+	Color(0.4, 0.8, 1.0, 0.5),
+	Color(0.806, 0.56, 0.0, 0.5), 
+	Color(0.4, 1.0, 0.6, 0.5)  
+]
+
+func spawn_ghosts():
+	var recent_runs = save_manager.get_recent_runs(3)
+
+	for i in range(recent_runs.size()):
+		var ghost = playerghost_scene.instantiate()
+		add_child(ghost)
+
+		ghost.start(
+			recent_runs[i]["record"],
+			ghost_colors[i % ghost_colors.size()]
+		)
+		
+func time_factor(t: float) -> float:
+	t = max(t, MIN_TIME)
+	var f = TIME_REF / t
+	return clamp(f, MIN_FACTOR, MAX_FACTOR)
