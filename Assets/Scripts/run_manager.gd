@@ -1,9 +1,5 @@
 extends Node2D
 
-const BASE_TILE_SCORE = 10.0
-const DECAY_PERPLAYER = 0.5
-const BASE_LOWEST_POINT = 2.0
-
 @export var run_timer_label : Label
 @export var tile_score_label: Label
 @export var final_score_label: Label
@@ -11,6 +7,11 @@ const BASE_LOWEST_POINT = 2.0
 @export var tilemap : TileMapLayer
 @export var debugtilemap : TileMapLayer
 @export var save_manager : Node   # SaveManager
+@export var leader_board: Control
+	
+const BASE_TILE_SCORE = 10.0
+const DECAY_PERPLAYER = 0.5
+const BASE_LOWEST_POINT = 2.0
 
 var visited_tiles := {}
 var global_tile_counts := {}
@@ -23,6 +24,12 @@ const DEBUG_SOURCE_ID = 0
 const DEBUG_ATLAS = Vector2i(0, 0)
 const DEBUG_ALT = 0
 
+# for recording our run data
+var run_record := []
+var record_timer := 0.0
+const RECORD_INTERVAL := 0.1
+
+
 func _ready():
 	# pull persistent tile counts
 	global_tile_counts = save_manager.tile_counts
@@ -33,6 +40,11 @@ func _process(delta):
 
 	run_time += delta
 	run_timer_label.text = "%.2f" % run_time
+	
+	record_timer += delta
+	if record_timer >= RECORD_INTERVAL:
+		record_timer = 0.0
+		record_snapshot()
 
 	track_tile()
 
@@ -62,7 +74,6 @@ func track_tile():
 
 # SCORING 
 func calculate_tile_score() -> float:
-	print("NEW NEW NEW NEW ++++++++++++++++++++++++++++++++++")
 	var score := 0.0
 
 	for key in visited_tiles.keys():
@@ -70,7 +81,6 @@ func calculate_tile_score() -> float:
 
 		var tile_value = BASE_TILE_SCORE - visits * DECAY_PERPLAYER
 		tile_value = max(tile_value, BASE_LOWEST_POINT)
-		print("key:", key, " value:", tile_value)
 		score += tile_value
 
 	return score
@@ -90,14 +100,26 @@ func end_run():
 	var final_score = tile_score
 
 	update_global_counts()
-
-	# persist results
+	
 	save_manager.tile_counts = global_tile_counts
-	save_manager.leaderboard.append(int(final_score))
-	save_manager.save_data()
+	var run_data = {
+		"name": save_manager.current_player_name,
+		"time": run_time,
+		"score": int(final_score),
+		"tiles": visited_tiles.keys(),
+		"record": run_record,
+		"timestamp": Time.get_unix_time_from_system()
+	}
 
+	save_manager.add_run(run_data)
+	
 	final_score_label.text = str(int(final_score))
+	
+	leader_board.show_leaderboard()
 
-	print("Run time:", run_time)
-	print("Tile score:", tile_score)
-	print("FINAL:", final_score)
+func record_snapshot():
+	run_record.append({
+		"t": run_time,
+		"x": player.global_position.x,
+		"y": player.global_position.y
+	})
