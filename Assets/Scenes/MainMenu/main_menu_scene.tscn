@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1bqevca4jeui"]
+[gd_scene load_steps=9 format=3 uid="uid://d1bqevca4jeui"]
 
 [ext_resource type="Script" uid="uid://detlxo3fchpks" path="res://Assets/Scenes/MainMenu/main_menu.gd" id="1_o8v1v"]
+[ext_resource type="Texture2D" uid="uid://dodyl018v43gt" path="res://Assets/Sprites/menu_background.png" id="2_hbub8"]
+[ext_resource type="Texture2D" uid="uid://faffqbsxec7n" path="res://Assets/Sprites/start.png" id="3_dyorj"]
+[ext_resource type="Texture2D" uid="uid://da7eo5jep7uoj" path="res://Assets/Sprites/starthover.png" id="3_l2sjv"]
+[ext_resource type="Texture2D" uid="uid://c2w5pucts7ftw" path="res://Assets/Sprites/leaderboards.png" id="4_ukbbs"]
+[ext_resource type="Texture2D" uid="uid://cta6nwyuodtme" path="res://Assets/Sprites/exit.png" id="5_or2he"]
+[ext_resource type="Texture2D" uid="uid://dtyqtbao2yc80" path="res://Assets/Sprites/leaderboardshover.png" id="6_or2he"]
+[ext_resource type="Texture2D" uid="uid://b6vfa0f0ui6h7" path="res://Assets/Sprites/exithover.png" id="8_fk6cb"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_o8v1v")
+
+[node name="MenuBackground" type="Sprite2D" parent="."]
+position = Vector2(240, 135)
+texture = ExtResource("2_hbub8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -12,41 +23,51 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 214.0
+offset_top = 248.0
+offset_right = 214.0
+offset_bottom = 248.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="StartButton" type="TextureButton" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 336.0
-offset_top = -158.0
-offset_right = 451.0
-offset_bottom = -30.0
-grow_vertical = 0
-alignment = 1
+anchors_preset = -1
+anchor_left = 0.35500002
+anchor_top = -0.56600004
+anchor_right = 0.35500002
+anchor_bottom = -0.56600004
+offset_left = -27.40001
+offset_top = -10.179993
+offset_right = 27.59999
+offset_bottom = 29.820007
+texture_normal = ExtResource("3_dyorj")
+texture_hover = ExtResource("3_l2sjv")
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
-layout_mode = 2
-text = "UNTREAD"
-horizontal_alignment = 2
+[node name="LeaderboardsButton" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42100003
+anchor_top = -0.44500002
+anchor_right = 0.42100003
+anchor_bottom = -0.44500002
+offset_left = -59.080017
+offset_top = -9.849991
+offset_right = 58.919983
+offset_bottom = 30.15001
+texture_normal = ExtResource("4_ukbbs")
+texture_hover = ExtResource("6_or2he")
 
-[node name="Start" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Start"
-
-[node name="Leaderboards" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Leaderboards"
-
-[node name="Exit" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Exit"
-
-[connection signal="button_down" from="CanvasLayer/Control/VBoxContainer/Start" to="." method="_on_start_button_down"]
-[connection signal="button_down" from="CanvasLayer/Control/VBoxContainer/Leaderboards" to="." method="_on_leaderboards_button_down"]
-[connection signal="button_down" from="CanvasLayer/Control/VBoxContainer/Exit" to="." method="_on_exit_button_down"]
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34
+anchor_top = -0.33
+anchor_right = 0.34
+anchor_bottom = -0.33
+offset_left = -20.199997
+offset_top = -7.899994
+offset_right = 19.800003
+offset_bottom = 32.100006
+texture_normal = ExtResource("5_or2he")
+texture_hover = ExtResource("8_fk6cb")

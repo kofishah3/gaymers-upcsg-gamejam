@@ -3,6 +3,14 @@ extends Control
 func _ready():
 	visible = false
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if visible:
+			close()
+		else:
+			open()
+		get_tree().root.set_input_as_handled()
+
 func open():
 	visible = true
 	get_tree().paused = true
