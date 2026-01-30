@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_l5tfc"]
 [ext_resource type="Texture2D" uid="uid://dry1wvtvgqqqb" path="res://Assets/Sprites/619588014_839028352452648_866527763532671093_n.png" id="1_nmjic"]
 [ext_resource type="Texture2D" uid="uid://c0qt01gudq05t" path="res://Assets/Sprites/temporary_tiles.png" id="2_ianxq"]
-[ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/player.tscn" id="3_jgeft"]
+[ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/Entities/player.tscn" id="3_jgeft"]
 [ext_resource type="Texture2D" uid="uid://dck7vtoqwvx2y" path="res://Assets/Sprites/background-elements.png" id="4_e43dn"]
 [ext_resource type="Texture2D" uid="uid://dthw0x1y0r3sv" path="res://Assets/Sprites/engineroomsprites.png" id="5_ao1pw"]
 [ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
@@ -1034,7 +1034,7 @@ scroll_offset = Vector2(0, 100)
 repeat_size = Vector2(300, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayers/Parallax2D2"]
-position = Vector2(500.00003, 121)
+position = Vector2(518, 7.6293945e-06)
 scale = Vector2(0.31423566, 0.3045962)
 texture = ExtResource("1_nmjic")
 
@@ -1091,7 +1091,6 @@ ladder_speed = 80.0
 
 [node name="Camera2D" parent="Entities/Player" instance=ExtResource("5_dwm12")]
 position = Vector2(0, -19)
-zoom = Vector2(4, 4)
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true

@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bn8ryl7dnd6np"]
 
-[ext_resource type="Texture2D" uid="uid://cy7h07prtewa1" path="res://Assets/Sprites/drone-beam-texture.png" id="1_4us42"]
-[ext_resource type="Script" uid="uid://dyqstux50uirm" path="res://Assets/Scenes/drone.gd" id="1_cx0qc"]
-[ext_resource type="Texture2D" uid="uid://w8mdgol71unj" path="res://Assets/Sprites/assistant-drone.png" id="1_qu60w"]
-[ext_resource type="Script" uid="uid://dkeg2ksuglaax" path="res://Assets/Scenes/drone_animator.gd" id="2_cp6q3"]
+[ext_resource type="Texture2D" uid="uid://431a7dsmfu84" path="res://Assets/Sprites/drone-beam-texture.png" id="1_4us42"]
+[ext_resource type="Script" uid="uid://dyqstux50uirm" path="res://Assets/Scripts/drone.gd" id="1_cx0qc"]
+[ext_resource type="Texture2D" uid="uid://x7g2sb0sbywi" path="res://Assets/Sprites/assistant-drone.png" id="1_qu60w"]
+[ext_resource type="Script" uid="uid://dkeg2ksuglaax" path="res://Assets/Scripts/drone_animator.gd" id="2_cp6q3"]
 
 [sub_resource type="Curve" id="Curve_cx0qc"]
 _data = [Vector2(0, 0.90944266), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.8589265, 0.0, 0, 0]

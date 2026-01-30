@@ -10,6 +10,7 @@ class_name PlayerController
 @export var dash_decay := 6000.0 #higher number, less distance
 @export var dash_cooldown := 0.6
 @export var ladder_speed = 3.0
+@export var run_manager : Node2D
 
 var speed_multiplier = 30.0
 var sprint_multiplier = 1.5
@@ -108,10 +109,12 @@ func start_dash():
 func _on_interaction_detector_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Ladder"):
 		is_on_ladder = true
-
+	if area.is_in_group("finish_area"):
+		run_manager.end_run()
 
 func _on_interaction_detector_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Ladder"):
 		is_on_ladder = false
 		is_climbing = false
-	
+	if area.is_in_group("finish_area"):
+		print("exited finish area")
