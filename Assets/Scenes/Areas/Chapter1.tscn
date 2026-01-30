@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/Entities/player.tscn" id="3_jgeft"]
 [ext_resource type="Texture2D" uid="uid://dck7vtoqwvx2y" path="res://Assets/Sprites/background-elements.png" id="4_e43dn"]
 [ext_resource type="Texture2D" uid="uid://dthw0x1y0r3sv" path="res://Assets/Sprites/engineroomsprites.png" id="5_ao1pw"]
-[ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
+[ext_resource type="PackedScene" uid="uid://cefciwqryshpn" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
 [ext_resource type="Texture2D" uid="uid://dtrrlabm3nplf" path="res://Assets/Sprites/otherbg_sprites.png" id="6_u6kpy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ao1pw"]
