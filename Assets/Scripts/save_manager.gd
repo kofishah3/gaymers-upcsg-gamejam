@@ -13,6 +13,12 @@ const BASE_TILE_SCORE = 10.0
 const DECAY_PERPLAYER = 0.5
 const BASE_LOWEST_POINT = 2.0
 
+const TIME_REF := 30.0      
+const MIN_TIME := 0.25      
+const MIN_FACTOR := 0.5
+const MAX_FACTOR := 2.0
+
+
 func _ready():
 	load_data()
 
@@ -47,15 +53,16 @@ func load_data():
 
 # score recalculation
 func score_for_run(run):
-	var score := 0.0
-	
+	var tile_sum := 0.0
 	for key in run["tiles"]:
 		var visits = tile_counts.get(key, 0)
 		var value = BASE_TILE_SCORE - visits * DECAY_PERPLAYER
 		value = max(value, BASE_LOWEST_POINT)
-		score += value
+		tile_sum += value
 
-	return int(score)
+	var t = float(run.get("time", 9999.0))
+	var tf = time_factor(t)
+	return int(tile_sum * tf)
 
 
 func add_run(run_data):
@@ -92,46 +99,7 @@ func get_recent_runs(count := 3):
 
 	return copy.slice(0, min(count, copy.size()))
 
-
-# THIS JUST FOR ME DEBUGGING ----------------------
-#func debug_print_run(run):
-	#print("================ RUN SAVED ================")
-	#print("Name: ", run.get("name", ""))
-	#print("Time: ", "%.2f" % float(run.get("time", 0.0)))
-	#print("Score: ", int(run.get("score", 0)))
-	#print("Unique tiles: ", (run.get("tiles", []) as Array).size())
-	#print("Snapshots: ", (run.get("record", []) as Array).size())
-	#print("TileCounts entries: ", tile_counts.size())
-	#print("==========================================")
-#
-#func debug_print_leaderboard():
-	#print("\n================ LEADERBOARD (TOP ", LEADERBOARD_SIZE, ") ================")
-	#var lb = get_leaderboard()
-	#if lb.is_empty():
-		#print("No runs yet.")
-		#print("==========================================================================")
-		#return
-#
-	#for i in range(lb.size()):
-		#var run = lb[i]
-		#var nickname = run.get("name", "???")
-		#var score = int(run.get("score", 0))
-		#var time = float(run.get("time", 0.0))
-		#print("#", i + 1, " | ", nickname, " | score=", score, " | time=", "%.2f" % time,
-			#" | tiles=", (run.get("tiles", []) as Array).size())
-	#print("==========================================================================")
-#
-#func debug_print_ghost_candidates():
-	#print("\n================ GHOST CANDIDATES (RECENT 3) ================")
-	#var ghosts = get_recent_runs()
-	#if ghosts.is_empty():
-		#print("No ghosts yet.")
-		#print("==========================================================")
-		#return
-#
-	#for i in range(ghosts.size()):
-		#var run = ghosts[i]
-		#print("#", i + 1, " | ", run.get("name", "???"),
-			#" | score=", int(run.get("score", 0)),
-			#" | snapshots=", (run.get("record", []) as Array).size())
-	#print("==========================================================")
+func time_factor(t: float) -> float:
+	t = max(t, MIN_TIME)
+	var f = TIME_REF / t
+	return clamp(f, MIN_FACTOR, MAX_FACTOR)

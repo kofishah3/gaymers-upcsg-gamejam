@@ -31,8 +31,11 @@ func refresh():
 
 		var playername = run.get("name", "???")
 		var score = int(run.get("score", 0))
+		var time = float(run.get("time", 0))
+		
+		var time_str = "%.2f" % time
+		entry.text = "#%02d  %-10s  |  %5d  |  %6ss" % [i + 1, playername, score, time_str]
 
-		entry.text = "#%d  %s  —  %d" % [i + 1, playername, score]
 		
 		# LEE PULIHI RA NI LATER	
 		if i == 0:
