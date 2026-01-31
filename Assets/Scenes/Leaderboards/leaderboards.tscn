@@ -1,0 +1,184 @@
+[gd_scene load_steps=8 format=3 uid="uid://rncwt4dlpghx"]
+
+[ext_resource type="Script" uid="uid://dpi6sfy8kxklf" path="res://Assets/Scenes/Leaderboards/leaderboard.gd" id="1_g3n8j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_board_bg"]
+bg_color = Color(0, 0, 0, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.721569, 0, 1, 0.8)
+shadow_color = Color(0.215686, 0, 0.321569, 0.776471)
+shadow_size = 2
+
+[sub_resource type="SystemFont" id="SystemFont_console"]
+font_names = PackedStringArray("Courier New", "Consolas", "Monaco", "monospace")
+antialiasing = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0, 0, 0, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.721569, 0, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0.721569, 0, 1, 0.3)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.35, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.2, 0, 0.2, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.35, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header_bg"]
+bg_color = Color(0.721569, 0, 1, 0.15)
+border_width_bottom = 1
+border_color = Color(0.721569, 0, 1, 0.4)
+
+[node name="Leaderboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g3n8j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="BoardFrame" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -120.0
+offset_right = 210.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board_bg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoardFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="TopBar" type="HBoxContainer" parent="BoardFrame/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="BoardFrame/VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.901961)
+theme_override_colors/font_shadow_color = Color(1, 0, 1, 0.5)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 12
+text = "TOP 10 PLAYERS"
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="BoardFrame/VBoxContainer/TopBar"]
+custom_minimum_size = Vector2(50, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+text = "EXIT"
+
+[node name="HeaderContainer" type="PanelContainer" parent="BoardFrame/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header_bg")
+
+[node name="HeaderHBox" type="HBoxContainer" parent="BoardFrame/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="RankHeader" type="Label" parent="BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "RANK"
+horizontal_alignment = 1
+
+[node name="NameHeader" type="Label" parent="BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "PLAYER"
+
+[node name="TimeHeader" type="Label" parent="BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "TIME"
+horizontal_alignment = 2
+
+[node name="ScoreHeader" type="Label" parent="BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "SCORE"
+horizontal_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoardFrame/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ScoreList" type="VBoxContainer" parent="BoardFrame/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="LoadingLabel" type="Label" parent="BoardFrame/VBoxContainer/ScrollContainer/ScoreList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "Connecting..."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="BoardFrame/VBoxContainer/TopBar/BackButton" to="." method="_on_back_button_pressed"]
