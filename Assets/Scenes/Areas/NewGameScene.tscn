@@ -1,6 +1,5 @@
-[gd_scene load_steps=62 format=4 uid="uid://bddxf82f2is0e"]
+[gd_scene load_steps=59 format=4 uid="uid://bddxf82f2is0e"]
 
-[ext_resource type="Script" uid="uid://8o46q688oju5" path="res://Assets/Scripts/save_manager.gd" id="1_755k1"]
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_q80i8"]
 [ext_resource type="Script" uid="uid://djsuma1ku48x5" path="res://Assets/Scripts/scoring_test.gd" id="1_ufhxm"]
 [ext_resource type="Texture2D" uid="uid://btxevb4xf78ov" path="res://Assets/Sprites/cave-bg.png" id="1_wnehw"]
@@ -19,14 +18,30 @@
 [ext_resource type="Texture2D" uid="uid://dmr8apcc6i7yu" path="res://Assets/Sprites/background-elements-destroyed.png" id="6_dt34c"]
 [ext_resource type="Texture2D" uid="uid://bfn081bdrrpp7" path="res://Assets/Sprites/ParallaxBGs/Version C/layers/far-mountains.png" id="6_peq8c"]
 [ext_resource type="Texture2D" uid="uid://1ytrpbeyg748" path="res://Assets/Sprites/ParallaxBGs/Version C/layers/canyon.png" id="7_3vls7"]
+[ext_resource type="Script" uid="uid://crgaiytjcyahb" path="res://Assets/Scripts/dust.gd" id="7_dt34c"]
 [ext_resource type="Texture2D" uid="uid://b6asyliui02jg" path="res://Assets/Sprites/Yellow flowers.png" id="8_xdinf"]
 [ext_resource type="Texture2D" uid="uid://d80mgewybmym" path="res://Assets/Sprites/White flowers.png" id="9_g4b22"]
 [ext_resource type="Texture2D" uid="uid://dkkwcjd6rcthk" path="res://Assets/Sprites/formations.png" id="11_sxrp7"]
 [ext_resource type="Texture2D" uid="uid://da8aovlq6ars4" path="res://Assets/Sprites/player_trail.png" id="12_3kjlq"]
-[ext_resource type="Script" uid="uid://dcjil7fo4uaxx" path="res://Assets/Scenes/UI/pause_menu.gd" id="13_y5g1i"]
-[ext_resource type="Script" uid="uid://be2mri08mp6wy" path="res://Assets/Scripts/leaderboard.gd" id="14_hwky8"]
-[ext_resource type="PackedScene" uid="uid://bsyin0m6hsplu" path="res://Assets/Scenes/Leaderboard/leaderboardentry.tscn" id="15_qq5dg"]
-[ext_resource type="Script" uid="uid://dp2daypamna5j" path="res://Assets/Scripts/pre_run_menu.gd" id="16_j61xi"]
+[ext_resource type="PackedScene" uid="uid://lhh25f5ushb0" path="res://Assets/Scenes/Leaderboards/leaderboardentry.tscn" id="23_sxrp7"]
+[ext_resource type="PackedScene" uid="uid://crpqhi624ube6" path="res://Assets/Scenes/UI/ui_scene.tscn" id="26_kn6w3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sxrp7"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(280, 150, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 80.90001
+angle_max = 80.90001
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+radial_velocity_min = -0.20002235
+radial_velocity_max = 0.009977648
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 1.1999999
+hue_variation_min = -0.38000003
+hue_variation_max = 0.40999997
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdinf"]
 texture = ExtResource("1_wnehw")
@@ -1368,23 +1383,11 @@ glow_blend_mode = 0
 glow_hdr_scale = 1.6
 glow_map_strength = 0.88
 
-[sub_resource type="SystemFont" id="SystemFont_2nq8v"]
-subpixel_positioning = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_hwky8"]
-font = SubResource("SystemFont_2nq8v")
-font_size = 30
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
 [node name="NewGameScene" type="Node2D" node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("1_ufhxm")
 pause_menu = NodePath("UI/PauseMenu")
 
-[node name="SaveManager" type="Node" parent="."]
-script = ExtResource("1_755k1")
-
-[node name="RunManager" type="Node2D" parent="." node_paths=PackedStringArray("run_timer_label", "tile_score_label", "final_score_label", "player", "tilemap", "debugtilemap", "save_manager", "leader_board")]
+[node name="RunManager" type="Node2D" parent="." node_paths=PackedStringArray("run_timer_label", "tile_score_label", "final_score_label", "player", "tilemap", "debugtilemap", "leader_board")]
 position = Vector2(0, 1)
 script = ExtResource("2_ufhxm")
 run_timer_label = NodePath("../UI/HUD/timer")
@@ -1393,45 +1396,57 @@ final_score_label = NodePath("../UI/HUD/final_score")
 player = NodePath("../World/Entities/Player")
 tilemap = NodePath("../World/Map/Layout")
 debugtilemap = NodePath("../World/Map/Trail")
-save_manager = NodePath("../SaveManager")
 leader_board = NodePath("../UI/Leaderboard")
 playerghost_scene = ExtResource("4_3kjlq")
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Node2D" type="Node2D" parent="World"]
+[node name="BgParallax" type="Node2D" parent="World"]
 modulate = Color(0.70380783, 0.70380783, 0.70380783, 1)
 position = Vector2(0, 600)
 
-[node name="Parallax2D" type="Parallax2D" parent="World/Node2D"]
+[node name="Parallax2D" type="Parallax2D" parent="World/BgParallax"]
 scroll_scale = Vector2(0.1, 0.1)
 scroll_offset = Vector2(-154, 294)
 repeat_size = Vector2(255, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Node2D/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="World/BgParallax/Parallax2D"]
 position = Vector2(284, -856)
 scale = Vector2(2, 2)
 texture = ExtResource("5_f62sw")
 
-[node name="Parallax2D2" type="Parallax2D" parent="World/Node2D"]
+[node name="Parallax2D2" type="Parallax2D" parent="World/BgParallax"]
 scroll_scale = Vector2(0.2, 0.2)
 scroll_offset = Vector2(-154, 449)
 repeat_size = Vector2(380, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Node2D/Parallax2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="World/BgParallax/Parallax2D2"]
 position = Vector2(357, -1068)
 scale = Vector2(2, 2)
 texture = ExtResource("6_peq8c")
 
-[node name="Parallax2D3" type="Parallax2D" parent="World/Node2D"]
+[node name="Parallax2D3" type="Parallax2D" parent="World/BgParallax"]
 scroll_scale = Vector2(0.5, 0.5)
 scroll_offset = Vector2(0, -69)
 repeat_size = Vector2(640, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Node2D/Parallax2D3"]
+[node name="Sprite2D" type="Sprite2D" parent="World/BgParallax/Parallax2D3"]
 position = Vector2(471, -799)
 scale = Vector2(2, 2)
 texture = ExtResource("7_3vls7")
+
+[node name="VFX" type="Node" parent="World"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="World/VFX" node_paths=PackedStringArray("cam")]
+position = Vector2(396, -843)
+amount = 250
+lifetime = 10.0
+explosiveness = 0.03
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_sxrp7")
+script = ExtResource("7_dt34c")
+camera_path = NodePath("../../Entities/Player/Camera2D")
+cam = NodePath("../../Entities/Player/Camera2D")
 
 [node name="Map" type="Node2D" parent="World"]
 
@@ -1479,6 +1494,7 @@ run_manager = NodePath("../../../RunManager")
 
 [node name="Camera2D" parent="World/Entities/Player" instance=ExtResource("5_wnehw")]
 position = Vector2(-1, -35)
+ignore_rotation = false
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -1607,54 +1623,6 @@ environment = SubResource("Environment_ufhxm")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" type="Control" parent="UI"]
-process_mode = 2
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_y5g1i")
-
-[node name="Panel" type="Panel" parent="UI/PauseMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -135.0
-offset_right = 240.0
-offset_bottom = 135.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/Panel"]
-layout_mode = 0
-offset_right = 480.0
-offset_bottom = 272.0
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/PauseMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Paused"
-label_settings = SubResource("LabelSettings_hwky8")
-horizontal_alignment = 1
-
-[node name="Resume" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Resume"
-
-[node name="Retry" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Retry"
-
-[node name="MainMenu" type="Button" parent="UI/PauseMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -1709,102 +1677,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Tile Points"
 
-[node name="Leaderboard" type="Control" parent="UI" node_paths=PackedStringArray("save_manager", "list_container")]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("14_hwky8")
-save_manager = NodePath("../../SaveManager")
-list_container = NodePath("Panel/LeaderboardContainer")
-entry_scene = ExtResource("15_qq5dg")
+[node name="Leaderboard" parent="UI" instance=ExtResource("23_sxrp7")]
 
-[node name="Panel" type="Panel" parent="UI/Leaderboard"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -135.0
-offset_right = 240.0
-offset_bottom = 135.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LeaderboardContainer" type="VBoxContainer" parent="UI/Leaderboard/Panel"]
-layout_mode = 0
-offset_right = 480.0
-offset_bottom = 272.0
-alignment = 1
-
-[node name="LeaderboardText" type="Label" parent="UI/Leaderboard/Panel/LeaderboardContainer"]
-layout_mode = 2
-text = "LEADERBOARD (TOP 10)"
-horizontal_alignment = 1
-
-[node name="PreRunMenu" type="Control" parent="UI" node_paths=PackedStringArray("save_manager")]
-process_mode = 2
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("16_j61xi")
-save_manager = NodePath("../../SaveManager")
-
-[node name="Panel" type="Panel" parent="UI/PreRunMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -135.0
-offset_right = 240.0
-offset_bottom = 135.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PreRunMenu/Panel"]
-layout_mode = 0
-offset_right = 480.0
-offset_bottom = 272.0
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/PreRunMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Get Ready to Run!"
-label_settings = SubResource("LabelSettings_hwky8")
-horizontal_alignment = 1
-
-[node name="LineEdit" type="LineEdit" parent="UI/PreRunMenu/Panel/VBoxContainer"]
-layout_mode = 2
-placeholder_text = "Nickname"
-
-[node name="Start" type="Button" parent="UI/PreRunMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Start Run"
-
-[node name="MainMenu" type="Button" parent="UI/PreRunMenu/Panel/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-
-[connection signal="button_down" from="UI/PauseMenu/Panel/VBoxContainer/Resume" to="UI/PauseMenu" method="_on_resume_button_down"]
-[connection signal="button_down" from="UI/PauseMenu/Panel/VBoxContainer/Retry" to="UI/PauseMenu" method="_on_retry_button_down"]
-[connection signal="button_down" from="UI/PauseMenu/Panel/VBoxContainer/MainMenu" to="UI/PauseMenu" method="_on_main_menu_button_down"]
-[connection signal="text_changed" from="UI/PreRunMenu/Panel/VBoxContainer/LineEdit" to="UI/PreRunMenu" method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="UI/PreRunMenu/Panel/VBoxContainer/LineEdit" to="UI/PreRunMenu" method="_on_line_edit_text_submitted"]
-[connection signal="button_down" from="UI/PreRunMenu/Panel/VBoxContainer/Start" to="UI/PreRunMenu" method="_on_start_button_down"]
-[connection signal="button_down" from="UI/PreRunMenu/Panel/VBoxContainer/MainMenu" to="UI/PreRunMenu" method="_on_main_menu_button_down"]
+[node name="PauseMenu" parent="UI" instance=ExtResource("26_kn6w3")]

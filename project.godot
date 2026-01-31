@@ -16,13 +16,23 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://cp1bkydcm2eio"
 
+[autoload]
+
+GameManager="*res://Assets/Scripts/game_manager.gd"
+SaveManager="*res://Assets/Scripts/save_manager.gd"
+
 [display]
 
 window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/mode=3
-window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/stretch/scale_mode="fractional"
+window/physics_ticks_per_second=120
+window/physics_interpolation=true
+window/snap/snap_2d_vertices_to_pixel=false
+window/snap/snap_2d_transforms_to_pixel=false
 
 [input]
 

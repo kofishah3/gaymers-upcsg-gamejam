@@ -4,10 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://dgh4kyyys13s0" path="res://Assets/Sprites/temp-character-runcycle.png" id="1_a32a6"]
 
 [node name="PlayerGhost" type="Node2D"]
+light_mask = 1048575
+visibility_layer = 1048575
+z_index = 100
 script = ExtResource("1_8g7ac")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.43137255, 1, 1, 0.25490198)
+self_modulate = Color(0.43137255, 1, 1, 0.6627451)
+z_index = 100
+z_as_relative = false
 position = Vector2(0, -10)
 texture = ExtResource("1_a32a6")
 region_enabled = true

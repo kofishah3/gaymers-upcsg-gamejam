@@ -6,7 +6,6 @@ extends Node2D
 @export var player : PlayerController
 @export var tilemap : TileMapLayer
 @export var debugtilemap : TileMapLayer
-@export var save_manager : Node   # SaveManager
 @export var leader_board: Control
 @export var playerghost_scene: PackedScene
 
@@ -36,10 +35,10 @@ var record_timer := 0.0
 const RECORD_INTERVAL := 0.05
 
 
-func _ready():
+func _ready():	
 	# pull persistent tile counts
-	global_tile_counts = save_manager.tile_counts
-	
+	global_tile_counts = SaveManager.tile_counts
+
 	spawn_ghosts()	
 
 func _process(delta):
@@ -110,9 +109,9 @@ func end_run():
 
 	update_global_counts()
 	
-	save_manager.tile_counts = global_tile_counts
+	SaveManager.tile_counts = global_tile_counts
 	var run_data = {
-		"name": save_manager.current_player_name,
+		"name": GameManager.player_name,
 		"time": run_time,
 		"score": int(final_score),
 		"tiles": visited_tiles.keys(),
@@ -120,11 +119,14 @@ func end_run():
 		"timestamp": Time.get_unix_time_from_system()
 	}
 
-	save_manager.add_run(run_data)
+	SaveManager.add_run(run_data)
 	
 	final_score_label.text = str(int(final_score))
 	
-	leader_board.show_leaderboard()
+	if leader_board:
+		leader_board.display_results()
+	else:
+		print("Warning: leader_board is not assigned in RunManager")
 
 func record_snapshot():
 	run_record.append({
@@ -135,18 +137,19 @@ func record_snapshot():
 	
 
 var ghost_colors = [
-	Color(0.4, 0.8, 1.0, 0.5),
-	Color(0.806, 0.56, 0.0, 0.5), 
-	Color(0.4, 1.0, 0.6, 0.5)  
+	Color(0.4, 0.8, 1.0, 0.7),
+	Color(0.806, 0.56, 0.0, 0.7), 
+	Color(0.4, 1.0, 0.6, 0.7)  
 ]
 
 func spawn_ghosts():
-	var recent_runs = save_manager.get_recent_runs(3)
-
+	var recent_runs = SaveManager.get_recent_runs(3)
+	
 	for i in range(recent_runs.size()):
 		var ghost = playerghost_scene.instantiate()
 		add_child(ghost)
-
+		
+		print(ghost)
 		ghost.start(
 			recent_runs[i]["record"],
 			ghost_colors[i % ghost_colors.size()]
