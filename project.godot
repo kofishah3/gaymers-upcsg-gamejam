@@ -75,10 +75,13 @@ pause={
 2d_physics/layer_2="PlayerDetector"
 2d_physics/layer_3="Interactables"
 
+[physics]
+
+common/physics_ticks_per_second=120
+common/physics_interpolation=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.18152961, 0.20415607, 0.36144277, 1)
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/Entities/player.tscn" id="3_jgeft"]
 [ext_resource type="Texture2D" uid="uid://dck7vtoqwvx2y" path="res://Assets/Sprites/background-elements.png" id="4_e43dn"]
 [ext_resource type="Texture2D" uid="uid://dthw0x1y0r3sv" path="res://Assets/Sprites/engineroomsprites.png" id="5_ao1pw"]
-[ext_resource type="PackedScene" uid="uid://cefciwqryshpn" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_dwm12"]
 [ext_resource type="Texture2D" uid="uid://dtrrlabm3nplf" path="res://Assets/Sprites/otherbg_sprites.png" id="6_u6kpy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ao1pw"]
@@ -1003,11 +1003,11 @@ fill = 1
 fill_from = Vector2(0.517094, 0.47863248)
 fill_to = Vector2(0.84615386, 0.12820514)
 
-[sub_resource type="Gradient" id="Gradient_ao1pw"]
+[sub_resource type="Gradient" id="Gradient_1ge47"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ao1pw"]
-gradient = SubResource("Gradient_ao1pw")
+gradient = SubResource("Gradient_1ge47")
 height = 48
 fill = 1
 fill_from = Vector2(0.4957265, 0.47435898)
