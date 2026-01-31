@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://cp1bkydcm2eio"
 
+[autoload]
+
+GameManager="*res://Assets/Scripts/game_manager.gd"
+
 [display]
 
 window/size/viewport_width=480

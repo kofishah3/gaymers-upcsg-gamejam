@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1bqevca4jeui"]
+[gd_scene load_steps=14 format=3 uid="uid://d1bqevca4jeui"]
 
 [ext_resource type="Script" uid="uid://detlxo3fchpks" path="res://Assets/Scenes/MainMenu/main_menu.gd" id="1_o8v1v"]
 [ext_resource type="Texture2D" uid="uid://dodyl018v43gt" path="res://Assets/Sprites/menu_background.png" id="2_hbub8"]
@@ -8,6 +8,43 @@
 [ext_resource type="Texture2D" uid="uid://cta6nwyuodtme" path="res://Assets/Sprites/exit.png" id="5_or2he"]
 [ext_resource type="Texture2D" uid="uid://dtyqtbao2yc80" path="res://Assets/Sprites/leaderboardshover.png" id="6_or2he"]
 [ext_resource type="Texture2D" uid="uid://b6vfa0f0ui6h7" path="res://Assets/Sprites/exithover.png" id="8_fk6cb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chat_bg"]
+bg_color = Color(0, 0, 0, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72156864, 0, 1, 0.8)
+shadow_color = Color(0.21568628, 0, 0.32156864, 0.7764706)
+shadow_size = 4
+
+[sub_resource type="SystemFont" id="SystemFont_console"]
+font_names = PackedStringArray("Courier New", "Consolas", "Monaco", "monospace")
+antialiasing = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_bg"]
+bg_color = Color(0, 0, 0, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72156864, 0, 1, 0.6)
+border_blend = true
+shadow_color = Color(1, 0, 1, 0.2)
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or2he"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_focus"]
+bg_color = Color(0, 0, 0, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.35, 1, 1)
+shadow_color = Color(1, 0, 1, 0.4)
+shadow_size = 3
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_o8v1v")
@@ -71,3 +108,113 @@ offset_right = 19.800003
 offset_bottom = 32.100006
 texture_normal = ExtResource("5_or2he")
 texture_hover = ExtResource("8_fk6cb")
+
+[node name="NameInputDialog" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -100.0
+offset_right = 220.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatFrame" type="Panel" parent="CanvasLayer/NameInputDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chat_bg")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/NameInputDialog/ChatFrame"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = -5.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9019608)
+theme_override_colors/font_shadow_color = Color(1, 0, 1, 0.5)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 12
+text = "be unique, be fast
+
+"
+horizontal_alignment = 1
+
+[node name="WelcomeLabel" type="Label" parent="CanvasLayer/NameInputDialog/ChatFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -50.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 1, 0.4)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 14
+text = "Enter your name to begin:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputContainer" type="VBoxContainer" parent="CanvasLayer/NameInputDialog/ChatFrame"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -40.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameInput" type="LineEdit" parent="CanvasLayer/NameInputDialog/ChatFrame/InputContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_selected_color = Color(1, 0, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.72156864, 0, 1, 0.5)
+theme_override_colors/caret_color = Color(1, 0.35, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_input_bg")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_or2he")
+theme_override_styles/focus = SubResource("StyleBoxFlat_input_focus")
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="EnterHint" type="Label" parent="CanvasLayer/NameInputDialog/ChatFrame/InputContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 1, 0.3)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = SubResource("SystemFont_console")
+theme_override_font_sizes/font_size = 10
+text = "RUN"
+horizontal_alignment = 1
+
+[connection signal="text_changed" from="CanvasLayer/NameInputDialog/ChatFrame/InputContainer/NameInput" to="." method="_on_name_input_text_changed"]
+[connection signal="text_submitted" from="CanvasLayer/NameInputDialog/ChatFrame/InputContainer/NameInput" to="." method="_on_name_input_confirmed"]

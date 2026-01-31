@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dwm02j57jg3ve"]
+[gd_scene load_steps=25 format=4 uid="uid://dwm02j57jg3ve"]
 
 [ext_resource type="Texture2D" uid="uid://ja2vgse3b4mg" path="res://Assets/Sprites/space-ship-tileset.png" id="1_kgarh"]
 [ext_resource type="Script" uid="uid://djsuma1ku48x5" path="res://Assets/Scripts/scoring_test.gd" id="1_mbj6b"]
@@ -843,18 +843,6 @@ sources/0 = SubResource("TileSetAtlasSource_08org")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1os1"]
 size = Vector2(42, 162)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_leaderboard_panel"]
-bg_color = Color(0.05, 0.01, 0.1, 0.8)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.9, 0.2, 0.8, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [node name="ScoringTest" type="Node2D"]
 script = ExtResource("1_mbj6b")
 
@@ -997,7 +985,6 @@ offset_top = -39.449997
 offset_right = 100.0
 offset_bottom = 26.550003
 grow_horizontal = 2
-grow_vertical = 2
 texture_normal = ExtResource("10_2lstm")
 texture_hover = ExtResource("11_2uumf")
 
@@ -1029,12 +1016,11 @@ offset_top = 18.450012
 offset_right = 100.0
 offset_bottom = 84.45001
 grow_horizontal = 2
-grow_vertical = 2
 texture_normal = ExtResource("14_yu7ut")
 texture_hover = ExtResource("15_8opy8")
 
 [node name="Leaderboard" type="Control" parent="UI"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -1049,99 +1035,31 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_leaderboard")
 
-[node name="ColorRect" type="ColorRect" parent="UI/Leaderboard"]
+[node name="Panel" type="Panel" parent="UI/Leaderboard"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.15, 0.9)
 
-[node name="BoardFrame" type="Panel" parent="UI/Leaderboard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBox_leaderboard_panel")
+[node name="LeaderboardContainer" type="VBoxContainer" parent="UI/Leaderboard/Panel"]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 272.0
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Leaderboard/BoardFrame"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
-
-[node name="TopBar" type="HBoxContainer" parent="UI/Leaderboard/BoardFrame/VBoxContainer"]
+[node name="LeaderboardText" type="Label" parent="UI/Leaderboard/Panel/LeaderboardContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TitleLabel" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/TopBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TOP 5 PLAYERS"
-vertical_alignment = 1
-
-[node name="BackButton" type="Button" parent="UI/Leaderboard/BoardFrame/VBoxContainer/TopBar"]
-custom_minimum_size = Vector2(120, 32)
-layout_mode = 2
-text = "EXIT"
-
-[node name="HeaderContainer" type="PanelContainer" parent="UI/Leaderboard/BoardFrame/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-
-[node name="HeaderHBox" type="HBoxContainer" parent="UI/Leaderboard/BoardFrame/VBoxContainer/HeaderContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="RankHeader" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-text = "#"
-horizontal_alignment = 1
-
-[node name="NameHeader" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "PLAYER NAME"
-
-[node name="TimeHeader" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "TIME"
-horizontal_alignment = 2
-
-[node name="ScoreHeader" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/HeaderContainer/HeaderHBox"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "SCORE"
-horizontal_alignment = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/Leaderboard/BoardFrame/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="ScoreList" type="VBoxContainer" parent="UI/Leaderboard/BoardFrame/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 4
-
-[node name="LoadingLabel" type="Label" parent="UI/Leaderboard/BoardFrame/VBoxContainer/ScrollContainer/ScoreList"]
-layout_mode = 2
-text = "Connecting..."
+text = "LEADERBOARD (TOP 10)"
 horizontal_alignment = 1
 
 [connection signal="button_down" from="UI/PauseMenu/Resume" to="UI/PauseMenu" method="_on_resume_button_down"]
 [connection signal="button_down" from="UI/PauseMenu/Retry" to="UI/PauseMenu" method="_on_retry_button_down"]
 [connection signal="button_down" from="UI/PauseMenu/Menu" to="UI/PauseMenu" method="_on_main_menu_button_down"]
-[connection signal="pressed" from="UI/Leaderboard/BoardFrame/VBoxContainer/TopBar/BackButton" to="UI/Leaderboard" method="_on_back_button_pressed"]

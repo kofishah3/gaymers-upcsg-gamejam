@@ -4,7 +4,6 @@ const SAVE_PATH = "user://save_data.json"
 
 var tile_counts := {}
 var leaderboard := []
-var current_player_name := ""
 var runs := [] # store 20 runs
 
 const MAX_RUNS := 20

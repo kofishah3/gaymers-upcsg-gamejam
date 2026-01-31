@@ -103,7 +103,7 @@ func end_run():
 	
 	save_manager.tile_counts = global_tile_counts
 	var run_data = {
-		"name": save_manager.current_player_name,
+		"name": GameManager.player_name,
 		"time": run_time,
 		"score": int(final_score),
 		"tiles": visited_tiles.keys(),
@@ -115,7 +115,10 @@ func end_run():
 	
 	final_score_label.text = str(int(final_score))
 	
-	leader_board.show_leaderboard()
+	if leader_board:
+		leader_board.show_leaderboard()
+	else:
+		print("Warning: leader_board is not assigned in RunManager")
 
 func record_snapshot():
 	run_record.append({
