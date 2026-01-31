@@ -5,12 +5,13 @@ var index := 0
 var elapsed := 0.0
 var playing := false
 
-func start(record_data, ghost_color := Color(1, 1, 1, 0.4)):
+func start(record_data, ghost_color := Color(1, 1, 1, 0.7)):
 	record = record_data
 	index = 0
 	elapsed = 0.0
 	playing = true
-
+	
+	modulate = Color(1,1,1,1)
 	$Sprite2D.modulate = ghost_color
 
 	if record.size() > 0:
@@ -19,10 +20,13 @@ func start(record_data, ghost_color := Color(1, 1, 1, 0.4)):
 
 func _process(delta):
 	if not playing:
-		modulate.a = lerp(modulate.a, 0.0, delta * 3)
-		if modulate.a < 0.05:
+		var c = $Sprite2D.modulate
+		c.a = lerp(c.a, 0.0, delta * 3.0)
+		$Sprite2D.modulate = c
+		if c.a < 0.05:
 			queue_free()
 		return
+
 
 	# Need at least 2 points to interpolate
 	if record.size() < 2:
@@ -54,5 +58,5 @@ func _process(delta):
 
 	var pos0 = Vector2(current["x"], current["y"])
 	var pos1 = Vector2(next["x"], next["y"])
-
+	
 	global_position = pos0.lerp(pos1, alpha)

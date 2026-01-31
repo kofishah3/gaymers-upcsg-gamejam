@@ -3,15 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c0qt01gudq05t" path="res://Assets/Sprites/temporary_tiles.png" id="1_mcep4"]
 [ext_resource type="Texture2D" uid="uid://c3fcylgqcam8a" path="res://Assets/Sprites/tiles_1.png" id="2_0b58t"]
 [ext_resource type="Texture2D" uid="uid://bsx0o5rgi72hj" path="res://Assets/Sprites/planet-tileset.png" id="3_0b58t"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://bn8ryl7dnd6np" path="res://Assets/Scenes/drone.tscn" id="3_r1r5t"]
-[ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/player.tscn" id="4_mr64c"]
-[ext_resource type="PackedScene" uid="uid://cefciwqryshpn" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_k836m"]
-=======
 [ext_resource type="PackedScene" uid="uid://bn8ryl7dnd6np" path="res://Assets/Scenes/Entities/drone.tscn" id="3_r1r5t"]
 [ext_resource type="PackedScene" uid="uid://my4hcpsq6yel" path="res://Assets/Scenes/Entities/player.tscn" id="4_mr64c"]
 [ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_k836m"]
->>>>>>> origin/dev
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ibwq"]
 texture = ExtResource("1_mcep4")

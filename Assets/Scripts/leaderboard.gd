@@ -4,7 +4,6 @@ extends Control
 @export var list_container : VBoxContainer
 @export var entry_scene : PackedScene
 
-
 func _ready():
 	visible = false
 	refresh()
@@ -23,7 +22,7 @@ func refresh():
 	for child in list_container.get_children():
 		child.queue_free()
 
-	var leaderboard = save_manager.get_leaderboard()
+	var leaderboard = SaveManager.get_leaderboard()
 
 	for i in range(leaderboard.size()):
 		var run = leaderboard[i]
@@ -37,7 +36,6 @@ func refresh():
 		entry.text = "#%02d  %-10s  |  %5d  |  %6ss" % [i + 1, playername, score, time_str]
 
 		
-		# LEE PULIHI RA NI LATER	
 		if i == 0:
 			entry.modulate = Color.GOLD
 		elif i == 1:
