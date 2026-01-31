@@ -12,6 +12,10 @@ class_name PlayerController
 @export var ladder_speed = 3.0
 @export var run_manager : Node2D
 
+@onready var jump_sound = $JumpSound
+@onready var dash_sound = $DashSound
+@onready var land_sound = $LandingSound
+
 var speed_multiplier = 30.0
 var sprint_multiplier = 1.5
 var jump_multiplier = -30.0
@@ -21,6 +25,8 @@ var is_dashing := false
 var dash_time := 0.0
 var dash_cooldown_time := 0.0
 var last_facing_direction := 1.0 
+var was_on_floor := false
+var has_jumped = false 
 
 var is_on_ladder := false 
 var is_climbing := false 
@@ -35,22 +41,37 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 		velocity.x = move_toward(velocity.x, 0, dash_decay * delta)
 		
+		$PlayerAnimator/DashParticles.gravity.x = -2000
+		$PlayerAnimator/DashParticles.emitting = true
+		
 		if dash_time <= 0:
 			is_dashing = false
-		
+			$PlayerAnimator/DashParticles.gravity.x = 2000
+			$PlayerAnimator/DashParticles.emitting = false
 		move_and_slide()
 		return
 	
+	if not was_on_floor and is_on_floor():
+		if land_sound:
+			land_sound.play()
+			
 	# GRAVITY
 	if not is_on_floor():
 		velocity += get_gravity() * delta 
 	else:
 		jump_count = 0
 	
+	if not was_on_floor and has_jumped:
+		if land_sound:
+			land_sound.play()
+		has_jumped = false
+			
 	# JUMP
 	if Input.is_action_just_pressed("jump"):		
 		var jump_boost := 0.0 
 		if jump_count < 2:
+			if jump_sound:
+				jump_sound.play()
 			# if double jump, shake camera - also make it stronger
 			if camera and jump_count == 1:
 				jump_boost = 2.0
@@ -61,6 +82,8 @@ func _physics_process(delta: float) -> void:
 	
 	# DASH INPUT
 	if Input.is_action_just_pressed("dash") and dash_cooldown_time <= 0:
+		if dash_sound:
+			dash_sound.play()
 		start_dash()
 		return  
 	
@@ -87,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		) * ladder_speed
 		jump_count = 1
 
-		
+	was_on_floor = is_on_floor()
 	move_and_slide()
 	
 func start_dash():

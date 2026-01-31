@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3guuk5tr4qtm"
+path="res://.godot/imported/keys-falling-on-ground-283265 (mp3cut.net).mp3-a0b21ae7a6532164948c3cd64b65de88.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/keys-falling-on-ground-283265 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/keys-falling-on-ground-283265 (mp3cut.net).mp3-a0b21ae7a6532164948c3cd64b65de88.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

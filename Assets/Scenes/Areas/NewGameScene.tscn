@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c7bf8ildjpuwr" path="res://Assets/Scenes/Entities/player_ghost.tscn" id="4_3kjlq"]
 [ext_resource type="Texture2D" uid="uid://btif7ao174bsm" path="res://Assets/Sprites/ParallaxBGs/version A/Layers/far-clouds.png" id="5_f62sw"]
 [ext_resource type="Texture2D" uid="uid://dtrrlabm3nplf" path="res://Assets/Sprites/otherbg_sprites.png" id="5_sxrp7"]
-[ext_resource type="PackedScene" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_wnehw"]
+[ext_resource type="PackedScene" uid="uid://cefciwqryshpn" path="res://Assets/Scenes/Areas/PlayerCamera.tscn" id="5_wnehw"]
 [ext_resource type="Texture2D" uid="uid://be3jm011w8ow4" path="res://Assets/Sprites/Wooden Sign.png" id="6_2dhus"]
 [ext_resource type="Texture2D" uid="uid://dmr8apcc6i7yu" path="res://Assets/Sprites/background-elements-destroyed.png" id="6_dt34c"]
 [ext_resource type="Texture2D" uid="uid://bfn081bdrrpp7" path="res://Assets/Sprites/ParallaxBGs/Version C/layers/far-mountains.png" id="6_peq8c"]
