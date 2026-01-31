@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://bn8ryl7dnd6np"]
+
+[ext_resource type="Texture2D" uid="uid://cy7h07prtewa1" path="res://Assets/Sprites/drone-beam-texture.png" id="1_4us42"]
+[ext_resource type="Script" uid="uid://dyqstux50uirm" path="res://Assets/Scenes/drone.gd" id="1_cx0qc"]
+[ext_resource type="Texture2D" uid="uid://w8mdgol71unj" path="res://Assets/Sprites/assistant-drone.png" id="1_qu60w"]
+[ext_resource type="Script" uid="uid://dkeg2ksuglaax" path="res://Assets/Scenes/drone_animator.gd" id="2_cp6q3"]
+
+[sub_resource type="Curve" id="Curve_cx0qc"]
+_data = [Vector2(0, 0.90944266), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.8589265, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_4us42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(5, 16, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_qu60w"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.0997183),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(5, 16, 16, 16), Rect2(27, 16, 16, 16), Rect2(5, 16, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cx0qc"]
+_data = {
+&"RESET": SubResource("Animation_4us42"),
+&"idle": SubResource("Animation_qu60w")
+}
+
+[sub_resource type="Gradient" id="Gradient_cp6q3"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_euhoy"]
+gradient = SubResource("Gradient_cp6q3")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.50427353, 0.45726496)
+fill_to = Vector2(0.8418803, 0.15811966)
+
+[node name="Drone" type="CharacterBody2D"]
+script = ExtResource("1_cx0qc")
+
+[node name="DroneAnimator" type="Node2D" parent="." node_paths=PackedStringArray("drone_controller", "sprite", "light_occluder")]
+script = ExtResource("2_cp6q3")
+drone_controller = NodePath("..")
+sprite = NodePath("Sprite2D")
+light_occluder = NodePath("../LightOccluder2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="DroneAnimator"]
+position = Vector2(0, -3)
+amount = 6
+texture = ExtResource("1_4us42")
+local_coords = true
+gravity = Vector2(0, 20)
+scale_amount_curve = SubResource("Curve_cx0qc")
+color = Color(0.8973333, 1, 0.72, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DroneAnimator"]
+libraries = {
+&"": SubResource("AnimationLibrary_cx0qc")
+}
+autoplay = "idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="DroneAnimator"]
+position = Vector2(0, -8)
+texture = ExtResource("1_qu60w")
+region_enabled = true
+region_rect = Rect2(5, 16, 16, 16)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9)
+color = Color(0.7788505, 0.9161577, 0.7461909, 1)
+energy = 0.33
+texture = SubResource("GradientTexture2D_euhoy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)

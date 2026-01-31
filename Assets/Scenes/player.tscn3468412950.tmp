@@ -1,0 +1,236 @@
+[gd_scene load_steps=19 format=3 uid="uid://my4hcpsq6yel"]
+
+[ext_resource type="Texture2D" uid="uid://dgh4kyyys13s0" path="res://Assets/Sprites/temp-character-runcycle.png" id="1_6cd4h"]
+[ext_resource type="Script" uid="uid://bovn276cct217" path="res://Assets/Scripts/player_controller.gd" id="1_7dd06"]
+[ext_resource type="Script" uid="uid://dfmbtdocfb6su" path="res://Assets/Scripts/player_animator.gd" id="2_38rej"]
+[ext_resource type="Texture2D" uid="uid://bsbfgo7p4461m" path="res://particle-removebg-preview.png" id="4_t1xgp"]
+
+[sub_resource type="Curve" id="Curve_t1xgp"]
+_data = [Vector2(0, 0.97752815), 0.0, 0.0, 0, 0, Vector2(0.9941861, 0.29213488), -0.8013152, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_38rej"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(4, 30, 16, 18)]
+}
+
+[sub_resource type="Animation" id="Animation_lerqx"]
+resource_name = "climbing"
+length = 20.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4, 4.25, 4.5, 4.75, 5, 5.25, 5.5, 5.75, 6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8, 8.25, 8.5, 8.75, 9, 9.25, 9.5, 9.75, 10, 10.25, 10.5, 10.75, 11, 11.25, 11.5, 11.75, 12, 12.25, 12.5, 12.75, 13, 13.25, 13.5, 13.75, 14, 14.25, 14.75, 15, 15.25, 15.5, 15.75, 16.25, 16.5, 16.75, 17, 17.25, 17.5, 17.75, 18, 18.25, 18.5, 18.75, 19, 19.25, 19.5, 19.75, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(4, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20), Rect2(28, 188, 16, 20), Rect2(52, 188, 16, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_t1xgp"]
+resource_name = "dash"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(76, 60, 16, 20), Rect2(76, 60, 16, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_c3tg1"]
+resource_name = "fall"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(28, 124, 16, 20), Rect2(28, 124, 16, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_23lac"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Rect2(4, 60, 16, 20), Rect2(28, 60, 16, 20), Rect2(28, 60, 16, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_w3t24"]
+resource_name = "jump"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(28, 92, 16, 20), Rect2(28, 92, 16, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_7dd06"]
+resource_name = "walking"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(4, 28, 16, 20), Rect2(28, 28, 16, 20), Rect2(52, 28, 16, 20), Rect2(76, 28, 16, 20), Rect2(4, 28, 16, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38rej"]
+_data = {
+&"RESET": SubResource("Animation_38rej"),
+&"climbing": SubResource("Animation_lerqx"),
+&"dash": SubResource("Animation_t1xgp"),
+&"fall": SubResource("Animation_c3tg1"),
+&"idle": SubResource("Animation_23lac"),
+&"jump": SubResource("Animation_w3t24"),
+&"walking": SubResource("Animation_7dd06")
+}
+
+[sub_resource type="Curve" id="Curve_23lac"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_w3t24"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7517241, 0.009873033), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_c3tg1"]
+colors = PackedColorArray(0.16520283, 0.16179082, 0.38500723, 1, 1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dd06"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38rej"]
+size = Vector2(18, 20)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_7dd06")
+speed = 3.5
+jump_power = 9.0
+dash_speed = 500.0
+dash_duration = 0.1
+dash_decay = 3000.0
+
+[node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite", "jump_particles")]
+script = ExtResource("2_38rej")
+player_controller = NodePath("..")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+jump_particles = NodePath("JumpBurstParticles")
+
+[node name="JumpBurstParticles" type="CPUParticles2D" parent="PlayerAnimator"]
+rotation = 0.19198622
+skew = 1.0471976
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 6.0
+initial_velocity_max = 15.0
+angular_velocity_max = 333.91
+scale_amount_curve = SubResource("Curve_t1xgp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnimator"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_38rej")
+}
+autoplay = "idle"
+speed_scale = 1.25
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerAnimator"]
+position = Vector2(0, -10)
+texture = ExtResource("1_6cd4h")
+region_enabled = true
+region_rect = Rect2(4, 30, 16, 18)
+
+[node name="DashParticles" type="CPUParticles2D" parent="PlayerAnimator"]
+z_index = -1
+rotation = 0.19198622
+scale = Vector2(0.99999994, 1)
+skew = 1.0471977
+emitting = false
+amount = 50
+texture = ExtResource("4_t1xgp")
+randomness = 0.46
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(1, 40)
+gravity = Vector2(-2000, 0)
+linear_accel_max = 66.42
+linear_accel_curve = SubResource("Curve_23lac")
+scale_amount_min = 0.0
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_w3t24")
+color_ramp = SubResource("Gradient_c3tg1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_7dd06")
+
+[node name="InteractionDetector" type="Area2D" parent="."]
+position = Vector2(0, -9)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_38rej")
+
+[connection signal="area_entered" from="InteractionDetector" to="." method="_on_interaction_detector_area_entered"]
+[connection signal="area_exited" from="InteractionDetector" to="." method="_on_interaction_detector_area_exited"]
